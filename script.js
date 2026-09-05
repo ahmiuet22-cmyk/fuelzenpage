@@ -1,13 +1,20 @@
 // FuelZen Landing Page JavaScript
 
 document.addEventListener('DOMContentLoaded', () => {
-    const downloadBtns = document.querySelectorAll('a[download]');
+    const downloadBtns = document.querySelectorAll('a[download], .download-btn, .nav-cta');
     const toast = document.getElementById('toast');
+    const directApkUrl = 'https://raw.githubusercontent.com/ahmiuet22-cmyk/fuelzenpage/main/fuelzen.apk';
 
-    // Show toast message when download button is clicked
     downloadBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
             showToast();
+            
+            // Explicit trigger for mobile webviews or browsers with download attribute restrictions
+            if (navigator.userAgent.match(/Android|iPhone|iPad|iPod/i)) {
+                setTimeout(() => {
+                    window.location.href = directApkUrl;
+                }, 400);
+            }
         });
     });
 
